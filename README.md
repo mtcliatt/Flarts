@@ -1,5 +1,7 @@
 # Flarts - Flutter Charts
 
+[![Pub](https://img.shields.io/pub/v/flarts.svg)](https://pub.dartlang.org/packages/flarts)
+
 #### Flutter + Charts = Flarts
 
 Flarts is a graphing/charting package for Flutter.
