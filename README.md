@@ -1,6 +1,4 @@
-# Flarts
-
-Flutter Charts
+# Flarts - Flutter Charts
 
 #### Flutter + Charts = Flarts
 
