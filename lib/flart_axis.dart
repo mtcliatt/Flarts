@@ -56,7 +56,6 @@ class FlartAxis<T extends Comparable> {
     this.min,
     this.max, {
     this.id,
-    List<Color> colors,
     Side side,
     AxisLabelConfig labelConfig,
     int numGridlines = 0,
