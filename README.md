@@ -50,7 +50,7 @@ Flarts is a graphing/charting package for Flutter.
 
 ### Simple data, simple example
 
-<img width="338" height="546" src="lib/example/screenshots/simple_data_example.png">
+<img width="507" height="819" src="lib/example/screenshots/simple_data_example.png">
 
 This basic example uses a custom range axis (from 10-25), and doesn't provide a custom domain axis so the chart fits the domain data.
 
