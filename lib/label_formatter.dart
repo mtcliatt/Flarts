@@ -6,7 +6,7 @@ class LabelFormatter {
     DateTime.february: 'Feb',
     DateTime.march: 'Mar',
     DateTime.april: 'Apr',
-    DateTime.may: 'Map',
+    DateTime.may: 'May',
     DateTime.june: 'June',
     DateTime.july: 'July',
     DateTime.august: 'Aug',
