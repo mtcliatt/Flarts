@@ -17,7 +17,6 @@ class FlartPainter extends CustomPainter {
   FlartPainter({this.dataList, this.axes, FlartStyle style})
       : this.style = style ?? FlartStyle();
 
-  // todo: cache everything that can be cached.
   @override
   void paint(Canvas canvas, Size size) {
     _drawBackground(canvas, size);
@@ -200,7 +199,6 @@ class FlartPainter extends CustomPainter {
     }
   }
 
-  // todo: draw data on its appropriate axis rather assuming domain=x & range=y.
   void _drawDataAsLine(Canvas canvas, FlartData data) {
     final points = <Offset>[];
     final rangeDistanceFn = distanceFnForType(data.minRange.runtimeType);
@@ -209,7 +207,7 @@ class FlartPainter extends CustomPainter {
     for (final datumKey in data.computedData.keys) {
       final datum = data.computedData[datumKey];
 
-      // todo: is all this necessary?
+      // todo: double check this late-night logic. is all this necessary?
       final rangeDistToMin = rangeDistanceFn(datum.range, data.rangeAxis.min);
       final domainDistToMin =
           domainDistanceFn(datum.domain, data.domainAxis.min);
@@ -222,15 +220,19 @@ class FlartPainter extends CustomPainter {
       if (data.domainAxis.direction == Axis.vertical) {
         if (data.rangeAxis.direction != Axis.horizontal) {
           throw ArgumentError('Domain and axis can not both be vertical :p');
-        } else {
-          final axisX =
-              chartBottomRight.dx - _normToAxis(data.rangeAxis, normAxisRange);
-          final axisY = chartBottomRight.dy -
-              _normToAxis(data.domainAxis, normAxisDomain);
-
-          points.add(Offset(axisX, axisY));
         }
+
+        final axisX =
+            chartBottomRight.dx - _normToAxis(data.rangeAxis, normAxisRange);
+        final axisY =
+            chartBottomRight.dy - _normToAxis(data.domainAxis, normAxisDomain);
+
+        points.add(Offset(axisX, axisY));
       } else {
+        if (data.rangeAxis.direction != Axis.vertical) {
+          throw ArgumentError('Domain and axis can not both be horizontal :p');
+        }
+
         points.add(Offset(x, y));
       }
     }
@@ -312,7 +314,6 @@ class FlartPainter extends CustomPainter {
     return painter;
   }
 
-  // todo: make sure repainting happens when/if it should.
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flarts/flart_data.dart';
 import 'package:flarts/label_formatter.dart';
 
-// todo: implement gridline styling.
-// todo: implement ticks.
 class Gridline {
   final double normalizedDistanceAlongAxis;
 

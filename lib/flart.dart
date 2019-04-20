@@ -5,6 +5,13 @@ import 'package:flarts/flart_data.dart';
 import 'package:flarts/flart_paint.dart';
 import 'package:flarts/flart_theme.dart';
 
+// todo: cache everything that can be cached.
+// todo: bevel the edges of the chart border.
+// todo: use [canvas.clipRect()] to prevent drawing over the rest of the screen.
+// todo: make sure repainting happens when/if it should.
+// todo: customizable gridline styling.
+// todo: customizable label styling.
+
 class Flart extends StatelessWidget {
   final List<FlartData> _dataList;
   final List<FlartAxis> _axes;
@@ -19,6 +26,7 @@ class Flart extends StatelessWidget {
   })  : _style = style ?? FlartStyle(),
         _axes = [] {
     final Map<String, FlartAxis> shared = {};
+
     sharedAxes.forEach((axis) => shared[axis.id] = axis);
 
     // Make sure all referenced axes were provided.
