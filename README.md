@@ -48,6 +48,8 @@ Flarts is a graphing/charting package for Flutter.
 
 ## Examples
 
+All examples shown below are screenshots from the example app included in the library.
+
 ### Simple data, simple example
 
 <img width="507" height="819" src="lib/example/screenshots/simple_data_example.png">
