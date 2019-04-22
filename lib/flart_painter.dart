@@ -19,6 +19,8 @@ class FlartPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    canvas.clipRect(Rect.fromLTWH(0, 0, size.width, size.height));
+    
     _drawBackground(canvas, size);
 
     final labels = _calculateLabelAreas(axes, style.labelPadding);
@@ -120,12 +122,14 @@ class FlartPainter extends CustomPainter {
 
   /// Paints a border around the chart area.
   void _drawFlartBorder(Canvas canvas) {
+    final halfStroke = style.borderStyle.strokeWidth / 2;
+
     final path = Path()
-      ..moveTo(chartTopLeft.dx, chartTopLeft.dy)
-      ..lineTo(chartTopLeft.dx, chartBottomRight.dy)
-      ..lineTo(chartBottomRight.dx, chartBottomRight.dy)
-      ..lineTo(chartBottomRight.dx, chartTopLeft.dy)
-      ..lineTo(chartTopLeft.dx, chartTopLeft.dy);
+      ..moveTo(chartTopLeft.dx + halfStroke, chartTopLeft.dy + halfStroke)
+      ..lineTo(chartTopLeft.dx + halfStroke, chartBottomRight.dy - halfStroke)
+      ..lineTo(chartBottomRight.dx, chartBottomRight.dy - halfStroke)
+      ..lineTo(chartBottomRight.dx, chartTopLeft.dy + halfStroke)
+      ..lineTo(chartTopLeft.dx + halfStroke, chartTopLeft.dy + halfStroke);
 
     canvas.drawPath(path, style.borderStyle);
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flarts/flart_axis.dart';
 import 'package:flarts/flart_data.dart';
-import 'package:flarts/flart_paint.dart';
+import 'package:flarts/flart_painter.dart';
 import 'package:flarts/flart_theme.dart';
 
 // todo: memoize everything that can be memoized.

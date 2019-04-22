@@ -61,7 +61,8 @@ class FlartStyle {
             (Paint()
               ..color = Colors.greenAccent
               ..style = PaintingStyle.stroke
-              ..strokeWidth = 1),
+              ..strokeWidth = 1
+              ..strokeJoin = StrokeJoin.bevel),
         this.gridlinePaint = gridlinePaint ??
             (Paint()
               ..color = Colors.white30
