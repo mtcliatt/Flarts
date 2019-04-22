@@ -23,16 +23,13 @@ class MyApp extends StatelessWidget {
 
 @immutable
 class FlartExamplePage extends StatefulWidget {
-  final Map<String, Widget> examples;
-
-  FlartExamplePage()
-      : examples = {
+  final Map<String, Widget> examples = {
+          'Simple Data': SimpleDataExample(),
           'Large Spark': LargeSparkExample(),
           'Sparks': SparkExample(),
-          'Simple Data': SimpleDataExample(),
           'Multi Data': MultiDataExample(),
         };
-
+        
   @override
   State<FlartExamplePage> createState() => FlartExamplePageState();
 }
@@ -80,7 +77,7 @@ class FlartExamplePageState extends State<FlartExamplePage> {
       Container(
         child: rowMode
             ? Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: controls,
               )
             : Column(

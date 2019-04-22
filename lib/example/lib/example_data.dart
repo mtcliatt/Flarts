@@ -1,6 +1,5 @@
 import 'package:flarts/flart_data.dart';
 
-
 class StockQuote {
   final DateTime timestamp;
   final double price;

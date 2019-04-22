@@ -76,7 +76,7 @@ class FlartPainter extends CustomPainter {
 
     void drawLabels(List<AxisLabel> labels, Function xFn, Function yFn) {
       labels.forEach((label) {
-        final painter = painterForText(label.text);
+        final painter = _painterForText(label.text);
         final x = xFn(label, painter.width, painter.height);
         final y = yFn(label, painter.width, painter.height);
 
@@ -160,7 +160,6 @@ class FlartPainter extends CustomPainter {
   }
 
   void _drawDataAsBar(Canvas canvas, FlartData data) {
-    // todo: also handle horizontal bars.
     // todo: see about other/better ways to handle thin bars.
     var barWidth = chartSize.width / data.maxDomainDistance;
     barWidth = barWidth < .5 ? 1.0 : barWidth;
@@ -218,10 +217,6 @@ class FlartPainter extends CustomPainter {
       final y = _axisToScreenY(data.rangeAxis, normAxisRange);
 
       if (data.domainAxis.direction == Axis.vertical) {
-        if (data.rangeAxis.direction != Axis.horizontal) {
-          throw ArgumentError('Domain and axis can not both be vertical :p');
-        }
-
         final axisX =
             chartBottomRight.dx - _normToAxis(data.rangeAxis, normAxisRange);
         final axisY =
@@ -229,10 +224,6 @@ class FlartPainter extends CustomPainter {
 
         points.add(Offset(axisX, axisY));
       } else {
-        if (data.rangeAxis.direction != Axis.vertical) {
-          throw ArgumentError('Domain and axis can not both be horizontal :p');
-        }
-
         points.add(Offset(x, y));
       }
     }
@@ -280,7 +271,7 @@ class FlartPainter extends CustomPainter {
 
     axes.forEach((axis) {
       axis.labels.forEach((label) {
-        final painter = painterForText(label.text, textStyle: label.style);
+        final painter = _painterForText(label.text, textStyle: label.style);
 
         if (axis.side == Side.top) {
           areaInfo.maxTop = max(painter.height, areaInfo.maxTop);
@@ -301,7 +292,7 @@ class FlartPainter extends CustomPainter {
   ///
   /// Also calls [layout()] on the painter before returning so that it's already
   /// done and the callers don't have to worry about that responsibility.
-  TextPainter painterForText(String text, {TextStyle textStyle}) {
+  TextPainter _painterForText(String text, {TextStyle textStyle}) {
     if (textPainterCache.containsKey(text)) return textPainterCache[text];
 
     final painter = TextPainter(

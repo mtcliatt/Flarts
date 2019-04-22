@@ -5,13 +5,14 @@ import 'package:flarts/flart_data.dart';
 import 'package:flarts/flart_paint.dart';
 import 'package:flarts/flart_theme.dart';
 
-// todo: cache everything that can be cached.
+// todo: memoize everything that can be memoized.
 // todo: bevel the edges of the chart border.
 // todo: use [canvas.clipRect()] to prevent drawing over the rest of the screen.
 // todo: make sure repainting happens when/if it should.
-// todo: customizable gridline styling.
-// todo: customizable label styling.
 
+/// Flart, a Flutter chart.
+///
+/// todo: write this dartdoc.
 class Flart extends StatelessWidget {
   final List<FlartData> _dataList;
   final List<FlartAxis> _axes;
@@ -84,6 +85,21 @@ class Flart extends StatelessWidget {
     });
 
     shared.forEach((_, axis) => _axes.add(axis));
+
+    _dataList.forEach(
+        (data) => _verifyDataAxesDirections(data.domainAxis, data.rangeAxis));
+  }
+
+  /// Verifies that the given axes have valid directions to make 
+  /// plotting data on the two axes possible.
+  void _verifyDataAxesDirections(FlartAxis domain, FlartAxis range) {
+    if (domain.direction == null ||
+        range.direction == null ||
+        domain.direction == range.direction) {
+      throw ArgumentError(
+          'Data can only be plotted on axes with different directions.'
+          'Axes directions were: ${domain.direction}, ${range.direction})');
+    }
   }
 
   // A sleek line chart with no labels or gridlines.
