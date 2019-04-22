@@ -8,6 +8,7 @@ class FlartPainter extends CustomPainter {
   final List<FlartData> dataList;
   final List<FlartAxis> axes;
   final FlartStyle style;
+
   Size chartSize;
   Offset chartTopLeft;
   Offset chartBottomRight;
@@ -166,7 +167,7 @@ class FlartPainter extends CustomPainter {
   void _drawDataAsBar(Canvas canvas, FlartData data) {
     // todo: see about other/better ways to handle thin bars.
     var barWidth = chartSize.width / data.maxDomainDistance;
-    barWidth = barWidth < .5 ? 1.0 : barWidth;
+    barWidth = barWidth < 1.0 ? 1.0 : barWidth;
     final rangeDistanceFn = distanceFnForType(data.minRange.runtimeType);
     final domainDistanceFn = distanceFnForType(data.minDomain.runtimeType);
 
@@ -220,15 +221,15 @@ class FlartPainter extends CustomPainter {
       final x = _axisToScreenX(data.domainAxis, normAxisDomain);
       final y = _axisToScreenY(data.rangeAxis, normAxisRange);
 
-      if (data.domainAxis.direction == Axis.vertical) {
+      if (data.domainAxis.direction == Axis.horizontal) {
+        points.add(Offset(x, y));
+      } else {
         final axisX =
             chartBottomRight.dx - _normToAxis(data.rangeAxis, normAxisRange);
         final axisY =
             chartBottomRight.dy - _normToAxis(data.domainAxis, normAxisDomain);
 
         points.add(Offset(axisX, axisY));
-      } else {
-        points.add(Offset(x, y));
       }
     }
 

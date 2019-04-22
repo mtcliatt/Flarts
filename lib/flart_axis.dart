@@ -3,12 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flarts/flart_data.dart';
 import 'package:flarts/label_formatter.dart';
 
-class Gridline {
-  final double normalizedDistanceAlongAxis;
-
-  Gridline(this.normalizedDistanceAlongAxis);
-}
-
 class AxisLabel {
   final double normalizedDistanceAlongAxis;
   final String text;
@@ -33,6 +27,12 @@ class AxisLabelConfig {
   AxisLabelTextSource text;
 
   AxisLabelConfig({this.frequency, this.text});
+}
+
+class Gridline {
+  final double normalizedDistanceAlongAxis;
+
+  Gridline(this.normalizedDistanceAlongAxis);
 }
 
 enum Side { left, top, right, bottom }
