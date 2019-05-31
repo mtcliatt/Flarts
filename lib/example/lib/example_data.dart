@@ -47,9 +47,9 @@ class Day extends Comparable<Day> {
 }
 
 List<double> get simplyDoubles =>
-    [10.0, 12.0, 14.0, 15.0, 18.0, 19.0, 20.0, 22.0, 21.0, 19.0];
+    [10.0, 12.0, 14.0, 15.0, 18.0, -4.0, -2.0, 2.0];
 
-List<double> get simplyCount => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+List<double> get simplyCount => [1, 2, 3, 4, 5, 6, 7, 8];
 
 List<StockQuote> get spyQuotes => [
   StockQuote(DateTime.parse("2019-04-10"), 288.29, 52463390),

@@ -21,7 +21,7 @@ class FlartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     canvas.clipRect(Rect.fromLTWH(0, 0, size.width, size.height));
-    
+
     _drawBackground(canvas, size);
 
     final labels = _calculateLabelAreas(axes, style.labelPadding);
@@ -177,9 +177,10 @@ class FlartPainter extends CustomPainter {
 
     for (var i = 0; i < dataKeys.length; i++) {
       final datum = data.computedData[dataKeys[i]];
-      final rangeDistToMin = rangeDistanceFn(datum.range, data.rangeAxis.min);
+      final rangeDistToMin =
+          rangeDistanceFn(datum.range, data.rangeAxis.minValue);
       final domainDistToMin =
-          domainDistanceFn(datum.domain, data.domainAxis.min);
+          domainDistanceFn(datum.domain, data.domainAxis.minValue);
       final normAxisDomain = domainDistToMin / data.domainAxis.range;
       final normAxisRange = rangeDistToMin / data.rangeAxis.range;
       final x = _axisToScreenX(data.domainAxis, normAxisDomain);
@@ -212,9 +213,10 @@ class FlartPainter extends CustomPainter {
       final datum = data.computedData[datumKey];
 
       // todo: double check this late-night logic. is all this necessary?
-      final rangeDistToMin = rangeDistanceFn(datum.range, data.rangeAxis.min);
+      final rangeDistToMin =
+          rangeDistanceFn(datum.range, data.rangeAxis.minValue);
       final domainDistToMin =
-          domainDistanceFn(datum.domain, data.domainAxis.min);
+          domainDistanceFn(datum.domain, data.domainAxis.minValue);
       final normAxisDomain = domainDistToMin / data.domainAxis.range;
       final normAxisRange = rangeDistToMin / data.rangeAxis.range;
 

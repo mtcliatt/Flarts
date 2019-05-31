@@ -37,35 +37,40 @@ class Gridline {
 
 enum Side { left, top, right, bottom }
 
-/// An axis spanning [min] to [max], with an orientation of [direction].
+/// An axis spanning [minValue] to [maxValue], with an orientation of [direction].
 class FlartAxis<T extends Comparable> {
   final Axis direction;
   final Side side;
 
   final double range;
-  final T min;
-  final T max;
+  final T minValue;
+  final T maxValue;
 
   final List<Gridline> gridlines = [];
   final List<AxisLabel> labels = [];
 
   final String id;
 
-  FlartAxis(
-    this.direction,
-    this.min,
-    this.max, {
+  FlartAxis({
+    @required this.direction,
+    @required this.minValue,
+    @required this.maxValue,
     this.id,
     Side side,
     AxisLabelConfig labelConfig,
     int numGridlines = 0,
     Map<T, String> customLabels,
     List<double> additionalCustomGridLines,
-  })  : this.side = side != null
+  })  : assert(direction != null),
+        assert(maxValue != null),
+        assert(minValue != null),
+        this.side = side != null
             ? side
             : direction == Axis.vertical ? Side.right : Side.bottom,
-        range = distanceFnForType(min.runtimeType)(min, max).abs() {
-    final labelToString = LabelFormatter.labelToStringForType(min.runtimeType);
+        range =
+            distanceFnForType(minValue.runtimeType)(minValue, maxValue).abs() {
+    final labelToString =
+        LabelFormatter.labelToStringForType(minValue.runtimeType);
     int numLabels;
 
     if (labelConfig.frequency == AxisLabelFrequency.perGridline) {
@@ -98,10 +103,11 @@ class FlartAxis<T extends Comparable> {
     if (numLabels > 0) {
       for (var i = 1; i < numLabels + 1; i++) {
         final normDistance = i / (numLabels + 1);
-        final label = labelConfig.text ==
-                AxisLabelTextSource.interpolateFromDataType
-            ? labelToString(interpolate(min, other: max, skew: normDistance))
-            : '$i';
+        final label =
+            labelConfig.text == AxisLabelTextSource.interpolateFromDataType
+                ? labelToString(
+                    interpolate(minValue, other: maxValue, skew: normDistance))
+                : '$i';
 
         labels.add(AxisLabel(normDistance, label));
       }
