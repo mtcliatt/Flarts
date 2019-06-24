@@ -50,9 +50,10 @@ class Flart extends StatelessWidget {
         if (data.domainAxis == null) {
           // If no axis or ID was provided, make a simple one with no labels.
           data.domainAxis = FlartAxis(
+            direction:
             Axis.horizontal,
-            data.minDomain,
-            data.maxDomain,
+            minValue:data.minDomain,
+            maxValue: data.maxDomain,
             // todo: move defaults like these into the theme.
             labelConfig: AxisLabelConfig(
               frequency: AxisLabelFrequency.none,
@@ -70,9 +71,9 @@ class Flart extends StatelessWidget {
         if (data.rangeAxis == null) {
           // If no axis or ID was provided, make a simple one with no labels.
           data.rangeAxis = FlartAxis(
-            Axis.horizontal,
-            data.minDomain,
-            data.maxDomain,
+            direction: Axis.horizontal,
+            minValue:data.minDomain,
+            maxValue: data.maxDomain,
             labelConfig: AxisLabelConfig(
               frequency: AxisLabelFrequency.none,
             ),
@@ -117,18 +118,18 @@ class Flart extends StatelessWidget {
       data.customColor = Colors.redAccent;
 
       data.domainAxis = FlartAxis(
-        Axis.horizontal,
-        dataList.first.minDomain,
-        dataList.first.maxDomain,
+        direction:Axis.horizontal,
+        minValue:dataList.first.minDomain,
+        maxValue:dataList.first.maxDomain,
         labelConfig: AxisLabelConfig(
           frequency: AxisLabelFrequency.none,
         ),
       );
 
       data.rangeAxis = FlartAxis(
-        Axis.vertical,
-        dataList.first.minRange,
-        dataList.first.maxRange,
+        direction:Axis.vertical,
+        minValue:dataList.first.minRange,
+        maxValue:dataList.first.maxRange,
         labelConfig: AxisLabelConfig(
           frequency: AxisLabelFrequency.none,
         ),
