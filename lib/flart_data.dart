@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 /// D is the domain type of the data (e.g., dates, days, numbers, etc)
 /// R is the range type of the data (e.g., prices, numbers, etc.)
 typedef DomainFn<T, D> = D Function(T, int);
-typedef RangeFn<T, R> = R Function(T, int);
+typedef RangeFn<T, R> = R Function(T, double);
 
 // todo: consider adding a ColorFn rather than using a single color per data.
 // typedef ColorFn<T> = Color Function(T, int);
@@ -198,7 +198,7 @@ class FlartData<T, D extends Comparable, R extends Comparable> {
 
     for (var i = 1; i < rawData.length; i++) {
       final domain = domainFn(rawData[i], i);
-      final range = rangeFn(rawData[i], i);
+      final range = rangeFn(rawData[i], i.toDouble());
       computedDomain.add(domain);
       computedRange.add(range);
 
